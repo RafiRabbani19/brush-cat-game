@@ -1,0 +1,1201 @@
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&family=Outfit:wght@300;400;600;800&family=Patrick+Hand&family=Kalam:wght@400;700&family=Special+Elite&family=Creepster&display=swap');
+
+/* CSS Reset & Variables */
+:root {
+  --terracotta: #E07A5F;
+  --sage: #81B29A;
+  --sand: #F4F1DE;
+  --dark-slate: #3D405B;
+  --cream: #FDFBF7;
+
+  --font-header: 'DynaPuff', cursive;
+  --font-body: 'Outfit', sans-serif;
+  --font-hand: 'Patrick Hand', cursive;
+
+  --shadow-dist: 2px;
+  --border-width: 2px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  background-color: var(--sand);
+  color: var(--dark-slate);
+  position: relative;
+  overflow-x: hidden;
+  line-height: 1.5;
+  /* HAPUS ATAU KOMENTARI BARIS INI: */
+  /* padding-bottom: 4rem; */
+}
+
+/* Paper Grain Texture Overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 9999;
+  /* SVG filter applied to create a tactile paper noise texture */
+  filter: url(#noiseFilter);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-header);
+  font-weight: 700;
+  color: var(--dark-slate);
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+}
+
+h3 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+}
+
+p {
+  font-size: 1.1rem;
+}
+
+a {
+  color: var(--terracotta);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+/* Custom Hand-Drawn Borders & Wavy Radii */
+.hand-drawn-border {
+  border: var(--border-width) solid var(--dark-slate);
+  filter: url(#hand-drawn);
+}
+
+.hand-drawn-border-wiggle {
+  border: var(--border-width) solid var(--dark-slate);
+  filter: url(#hand-drawn-wiggle);
+}
+
+.organic-shape-1 {
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}
+
+.organic-shape-2 {
+  border-radius: 30px 10px 40px 15px / 15px 35px 20px 40px;
+}
+
+.organic-shape-3 {
+  border-radius: 120px 15px 100px 30px / 25px 115px 25px 120px;
+}
+
+/* General Layouts */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+main.container {
+  flex: 1;
+}
+
+header {
+  padding: 1rem 0rem;
+  margin-bottom: 5rem;
+  width: 100%;
+  /* Memastikan header membentang penuh mengikuti container */
+  border-bottom: var(--border-width) solid var(--dark-slate);
+  /* Memberikan garis bawah hitam estetik seperti footer */
+  z-index: 10;
+  position: relative;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/*atur logo brush cat simulator*/
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  transform: rotate(-1.5deg);
+}
+
+.logo-icon {
+  background-color: var(--terracotta);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  box-shadow: 4px 4px 0 var(--dark-slate);
+  transition: transform 0.2s ease;
+}
+
+.logo-container:hover .logo-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.logo-text {
+  font-family: var(--font-header);
+  font-size: 1.8rem;
+  color: var(--dark-slate);
+  text-shadow: 2px 2px 0 var(--sand), 4px 4px 0 var(--dark-slate);
+}
+
+/* Mengatur list menu agar sejajar ke samping dengan jarak yang pas */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+/* tombol button how to play */
+.nav-item a {
+  display: block;
+  padding: 0.5rem 1.2rem;
+  background-color: var(--cream);
+  color: var(--dark-slate);
+  border: 2px solid var(--dark-slate);
+  font-family: var(--font-header);
+  font-size: 1rem;
+  transform: rotate(calc(var(--rotation, 0) * 1deg));
+  box-shadow: 3px 3px 0 var(--dark-slate);
+}
+
+.nav-item:nth-child(1) a {
+  --rotation: -2;
+}
+
+.nav-item:nth-child(2) a {
+  --rotation: 1;
+}
+
+.nav-item:nth-child(3) a {
+  --rotation: -1;
+}
+
+.nav-item a:hover {
+  transform: translateY(-3px) scale(1.05) rotate(0deg);
+  box-shadow: 5px 5px 0 var(--dark-slate);
+  background-color: var(--sage);
+}
+
+/* Tape decoration */
+.tape {
+  position: absolute;
+  background-color: rgba(244, 241, 222, 0.7);
+  /* translucent cream */
+  border-left: 1px dashed rgba(0, 0, 0, 0.1);
+  border-right: 1px dashed rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  font-family: var(--font-hand);
+  font-size: 2rem;
+  color: rgba(61, 64, 91, 0.6);
+  text-align: center;
+  line-height: 25px;
+  transform: rotate(-10deg);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.tape-top-left {
+  width: 100px;
+  height: 26px;
+  top: -12px;
+  left: -20px;
+  transform: rotate(-15deg);
+}
+
+.tape-top-right {
+  width: 150px;
+  height: 38px;
+  top: 100px;
+  right: 15px;
+  transform: rotate(15deg);
+}
+
+.tape-center {
+  width: 120px;
+  height: 30px;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+}
+
+/* Paper Card Component */
+.card {
+  background-color: var(--cream);
+  padding: 2rem;
+  position: relative;
+  box-shadow: var(--shadow-dist) var(--shadow-dist) 0 var(--dark-slate);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+  transform: rotate(calc(var(--card-rotation, 0) * 1deg));
+}
+
+.card:hover {
+  transform: translateY(-8px) rotate(calc(var(--card-rotation, 0) * 0.5deg)) scale(1.01);
+  box-shadow: 10px 10px 0 var(--dark-slate);
+}
+
+.card.card-terracotta {
+  background-color: var(--terracotta);
+  color: var(--sand);
+}
+
+.card.card-terracotta h2,
+.card.card-terracotta h3 {
+  color: var(--sand);
+}
+
+.card.card-sage {
+  background-color: var(--sage);
+  color: var(--dark-slate);
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  font-family: var(--font-header);
+  font-size: 1.2rem;
+  padding: 0.8rem 1.8rem;
+  background-color: var(--terracotta);
+  color: var(--sand);
+  border: 3px solid var(--dark-slate);
+  box-shadow: 5px 5px 0 var(--dark-slate);
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease, background-color 0.2s;
+  user-select: none;
+  filter: url(#hand-drawn);
+}
+
+.btn:hover {
+  transform: translate(-2px, -2px) scale(1.05);
+  box-shadow: 7px 7px 0 var(--dark-slate);
+  background-color: #e58d75;
+}
+
+.btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 var(--dark-slate);
+}
+
+.btn-sage {
+  background-color: var(--sage);
+  color: var(--dark-slate);
+}
+
+.btn-sage:hover {
+  background-color: #92c0a9;
+}
+
+/* Doodle & Sticker elements */
+.sticker {
+  position: absolute;
+  font-family: var(--font-hand);
+  font-size: 1.1rem;
+  background: white;
+  border: 2px solid var(--dark-slate);
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
+  box-shadow: 3px 3px 0 var(--dark-slate);
+  transform: rotate(var(--sticker-rot, 5deg));
+  z-index: 5;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  pointer-events: auto;
+  transition: transform 0.2s ease;
+}
+
+.sticker:hover {
+  transform: rotate(var(--sticker-rot, 5deg)) scale(1.1);
+}
+
+/* Hero Section */
+.hero {
+  padding: 3rem 0;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 3rem;
+  align-items: center;
+  position: relative;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-badge {
+    justify-content: center;
+  }
+}
+
+.hero-content {
+  position: relative;
+}
+
+.hero-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--terracotta);
+  font-family: var(--font-header);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.hero h1 span.highlight {
+  color: var(--terracotta);
+  position: relative;
+  display: inline-block;
+}
+
+.hero h1 span.highlight::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background-color: var(--sage);
+  z-index: -1;
+  opacity: 0.5;
+  border-radius: 5px;
+}
+
+.hero p {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  margin-top: 15rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+.hero-buttons {
+  margin-top: 6rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .hero-buttons {
+    justify-content: center;
+  }
+}
+
+.gift {
+  background: white;
+  padding: 15px 15px 65px 15px;
+  border: var(--border-width) solid var(--dark-slate);
+  box-shadow: var(--shadow-dist) var(--shadow-dist) 0 var(--dark-slate);
+  width: 2000px;
+  /* <-- UBAH UKURAN LEBAR DI SINI (Misalnya 400px atau 450px) */
+}
+
+.image-placeholder {
+  height: 380px;
+  /* <-- UBAH UKURAN TINGGI GAMBAR DI SINI */
+  border: 5px solid var(--dark-slate);
+  overflow: hidden;
+}
+
+/* ===== Footer Styling ===== */
+.main-footer {
+  background-color: #E8E4D8;
+  border-top: var(--border-width) solid var(--dark-slate);
+  margin-top: auto;
+  /* <-- UBAH DARI 5rem MENJADI auto */
+  padding: 2rem 0;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.footer-logo {
+  font-family: var(--font-header);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--dark-slate);
+}
+
+.footer-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--dark-slate);
+  opacity: 0.85;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-links a {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--dark-slate);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--terracotta);
+}
+
+/* Responsif untuk Layar HP (Mobile) */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+}
+
+/* ===== GAME PAGE STYLES ===== */
+
+body.game-page {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #F4F1DE;
+  /* Sand background as requested */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Game Area ===== */
+#game-area {
+  position: relative;
+  width: 750px;
+  height: 750px;
+  cursor: none;
+  /* hide default cursor inside game area */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ===== Cat Image ===== */
+#cat {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: auto;
+  pointer-events: none;
+  /* clicks go through to game-area */
+  transition: none;
+  z-index: 1;
+}
+
+/* Zoom-in class applied on game over (cat lunging at player) */
+#cat.zoom-in {
+  animation: catZoom 0.4s ease-in forwards;
+}
+
+@keyframes catZoom {
+  to {
+    transform: translate(-50%, -50%) scale(3);
+  }
+}
+
+/* ===== Score ===== */
+#score {
+  position: absolute;
+  top: -150px;
+  left: -90px;
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 80px;
+  color: #FF9F1C;
+  /* Playful orange */
+  text-shadow:
+    3px 3px 0px #FFF,
+    -3px -3px 0px #FFF,
+    3px -3px 0px #FFF,
+    -3px 3px 0px #FFF,
+    5px 5px 0px rgba(0, 0, 0, 0.15);
+  z-index: 5;
+  pointer-events: none;
+  rotate: -20deg;
+}
+
+/* Animation class toggled via JS */
+#score.pop {
+  animation: scorePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes scorePop {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ===== Custom Comb Cursor ===== */
+#comb {
+  position: absolute;
+  width: 250px;
+  height: auto;
+  pointer-events: none;
+  z-index: 10;
+  /* hidden until mouse enters game area */
+  display: none;
+  /* default upright */
+  transform: translate(-50%, -100%);
+  transition: transform 0.1s ease;
+}
+
+/* Tilted state when mousedown (brushing) */
+#comb.brushing {
+  transform: translate(-50%, -100%) rotate(-15deg) scale(0.8);
+}
+
+/* ===== Falling Hair ===== */
+.hair {
+  position: absolute;
+  width: 50px;
+  height: auto;
+  pointer-events: none;
+  z-index: 4;
+  animation: hairFall 3s ease-in-out forwards;
+}
+
+@keyframes hairFall {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(120px);
+  }
+}
+
+/* ===== Game Over Overlay ===== */
+#game-over {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(139, 0, 0, 0.75);
+  /* transparent red smoke */
+  backdrop-filter: blur(8px);
+  /* smoky blur effect */
+  color: #000000;
+  display: none;
+  /* hidden by default */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  cursor: pointer;
+  opacity: 0;
+}
+
+/* Visible state: shown with fade-in animation */
+#game-over.visible {
+  display: flex;
+  animation: horrorFadeIn 0.8s ease-out forwards;
+}
+
+#game-over p {
+  font-family: 'Creepster', cursive, sans-serif;
+  font-size: 80px;
+  font-weight: normal;
+  margin-bottom: 16px;
+  letter-spacing: 3px;
+  text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+#game-over span {
+  font-family: 'Special Elite', monospace;
+  font-size: 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes horrorFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ===== LEADERBOARD & LAYOUT ===== */
+.game-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+  position: relative;
+}
+
+.sidebar-container {
+  position: absolute;
+  left: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 650px;
+  z-index: 3;
+}
+
+/* Scrap paper for leaderboard */
+.leaderboard-sidebar {
+  position: relative;
+  background-color: #fcfbf5;
+  padding: 30px 20px;
+  box-shadow: 4px 6px 0px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
+}
+
+.leaderboard-sidebar:hover {
+  transform: translateY(-4px) rotate(1deg);
+  box-shadow: 6px 10px 0px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.leaderboard-title {
+  font-family: 'Kalam', cursive;
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.leaderboard-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  font-family: 'Kalam', cursive;
+  font-size: 20px;
+  border-bottom: 2px dashed rgba(0, 0, 0, 0.1);
+  padding-bottom: 20px;
+}
+
+.leaderboard-item .rank {
+  font-weight: bold;
+  width: 35px;
+  color: #FF9F1C;
+}
+
+.leaderboard-item .username {
+  flex-grow: 1;
+  color: #555;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.leaderboard-item .high-score {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Leaderboard Divider */
+.leaderboard-divider {
+  width: 100%;
+  height: 2px;
+  margin: 15px 0;
+}
+
+/* My Best Item in Leaderboard */
+.leaderboard-item.my-best {
+  margin-right: -10px;
+  margin-left: -10px;
+  background-color: #E8E5D3;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  border-bottom: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.leaderboard-item.my-best .rank {
+  font-weight: bold;
+  width: 35px;
+  color: #FF9F1C;
+  margin-right: 20px;
+}
+
+.leaderboard-item.my-best .username {
+  flex-grow: 1;
+  color: #555;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+/* Tape Top Center Utility */
+.tape-top-center {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 80px;
+}
+
+/* ===== SCRAPBOOK AUTH MODAL ===== */
+
+/* Modal Backdrop Overlay */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(61, 64, 91, 0.65); /* dark slate with opacity */
+  backdrop-filter: blur(3px);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal Paper Container */
+.scrapbook-modal {
+  background-color: var(--cream);
+  border: 3px solid var(--dark-slate);
+  filter: url(#hand-drawn);
+  box-shadow: 10px 10px 0 var(--dark-slate);
+  padding: 3rem 2.2rem 2.2rem 2.2rem;
+  width: 90%;
+  max-width: 440px;
+  position: relative;
+  border-radius: 20px 8px 30px 12px / 12px 25px 15px 35px; /* Organic wobbly card shape */
+  transform: rotate(-1.5deg) scale(0.9);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-backdrop.active .scrapbook-modal {
+  transform: rotate(-0.5deg) scale(1);
+}
+
+/* Wobble effect during view transitions */
+@keyframes modalWobble {
+  0% { transform: rotate(-1deg) scale(1); }
+  25% { transform: rotate(1.5deg) scale(1.03); }
+  75% { transform: rotate(-2deg) scale(0.97); }
+  100% { transform: rotate(-0.5deg) scale(1); }
+}
+
+.scrapbook-modal.wobble-anim {
+  animation: modalWobble 0.4s ease-in-out;
+}
+
+/* Modal Views switching */
+.modal-view {
+  display: none;
+}
+
+.modal-view.active {
+  display: block;
+}
+
+/* Modal Close Button */
+.modal-close-btn {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background-color: var(--terracotta);
+  color: var(--sand);
+  border: 3px solid var(--dark-slate);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-family: var(--font-header);
+  font-size: 1.6rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--dark-slate);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease, background-color 0.2s;
+  z-index: 10;
+  filter: url(#hand-drawn);
+  padding: 0;
+  line-height: 1;
+}
+
+.modal-close-btn:hover {
+  transform: scale(1.15) rotate(15deg);
+  box-shadow: 5px 5px 0 var(--dark-slate);
+  background-color: #e58d75;
+}
+
+.modal-close-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--dark-slate);
+}
+
+/* Modal Title */
+.modal-title {
+  font-family: 'Kalam', cursive;
+  font-size: 2.4rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--dark-slate);
+  transform: rotate(-1deg);
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.05);
+}
+
+/* Modal Form styling */
+.form-group {
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.handwritten-label {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.4rem;
+  color: var(--dark-slate);
+  margin-bottom: 0.2rem;
+  margin-left: 0.5rem;
+  transform: rotate(-0.5deg);
+}
+
+/* Handbook Input fields */
+.handbook-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 3px solid var(--dark-slate);
+  background-color: #fdfdfa;
+  color: var(--dark-slate);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 12px 8px 14px 10px / 9px 12px 9px 11px;
+  filter: url(#hand-drawn);
+  outline: none;
+  box-shadow: 3px 3px 0 var(--dark-slate);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, background-color 0.2s;
+}
+
+.handbook-input:focus {
+  box-shadow: 5px 5px 0 var(--dark-slate);
+  transform: translate(-1px, -1px);
+  background-color: #ffffff;
+}
+
+/* Error states for inputs */
+.handbook-input.has-error {
+  border-color: var(--terracotta);
+}
+
+.field-error {
+  color: var(--terracotta);
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 0.3rem;
+  margin-left: 0.6rem;
+  display: none;
+  transform: rotate(-0.5deg);
+  animation: shakeError 0.3s ease-in-out;
+}
+
+@keyframes shakeError {
+  0%, 100% { transform: rotate(-0.5deg) translateX(0); }
+  25% { transform: rotate(-0.5deg) translateX(-4px); }
+  75% { transform: rotate(-0.5deg) translateX(4px); }
+}
+
+/* Password Container and Toggle */
+.password-input-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper .handbook-input {
+  padding-right: 3rem; /* Leave space for emoji toggle */
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  user-select: none;
+}
+
+.password-toggle-btn:hover {
+  transform: scale(1.2) rotate(8deg);
+}
+
+.password-toggle-btn:active {
+  transform: scale(0.9);
+}
+
+/* Modal Submit Button */
+.modal-submit-btn {
+  width: 100%;
+  margin-top: 0.8rem;
+  font-size: 1.3rem;
+  padding: 0.8rem;
+}
+
+/* Divider inside modal */
+.hand-drawn-divider {
+  border-top: 2px dashed rgba(61, 64, 91, 0.4);
+  margin: 1.5rem 0;
+  width: 100%;
+  transform: rotate(0.5deg);
+}
+
+/* Modal footer text */
+.modal-footer-text {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.3rem;
+  text-align: center;
+  color: var(--dark-slate);
+}
+
+/* Highlighted Marker link */
+.highlight-link {
+  display: inline-block;
+  cursor: pointer;
+  font-family: 'Kalam', cursive;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--dark-slate);
+  background-color: rgba(255, 235, 59, 0.45); /* translucent bright yellow marker */
+  padding: 0.05rem 0.5rem;
+  border-radius: 4px 10px 3px 8px / 6px 3px 5px 4px;
+  margin-left: 0.2rem;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s;
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.05);
+}
+
+.highlight-link:hover {
+  background-color: rgba(255, 235, 59, 0.75);
+  transform: rotate(-1.5deg) scale(1.06);
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+}
+
+/* Decorative absolute elements on modal */
+.modal-tape-decor {
+  position: absolute;
+  background-color: rgba(244, 241, 222, 0.85); /* cream tape */
+  border-left: 1px dashed rgba(0, 0, 0, 0.15);
+  border-right: 1px dashed rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.3rem;
+  color: rgba(61, 64, 91, 0.7);
+  padding: 2px 10px;
+  line-height: 1.2;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.modal-tape-top-left {
+  top: -12px;
+  left: 20px;
+  transform: rotate(-12deg);
+}
+
+.modal-sticker-decor {
+  position: absolute;
+  font-size: 1.8rem;
+  z-index: 5;
+  pointer-events: none;
+  user-select: none;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-sticker-paw {
+  bottom: -15px;
+  left: -15px;
+  transform: rotate(-20deg);
+}
+
+.modal-sticker-cat {
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%) rotate(5deg) scale(1.2);
+}
+
+/* Wobbly toast notification */
+.toast-container {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  background-color: var(--cream);
+  border: 3px solid var(--dark-slate);
+  padding: 0.9rem 1.4rem;
+  border-radius: 12px 6px 14px 5px / 7px 11px 6px 10px;
+  filter: url(#hand-drawn);
+  box-shadow: 5px 5px 0 var(--dark-slate);
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--dark-slate);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: translateX(130%) rotate(5deg);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toast.active {
+  transform: translateX(0) rotate(-1.5deg);
+}
+
+.toast-success {
+  background-color: var(--sage);
+  color: var(--dark-slate);
+}
+
+.toast-error {
+  background-color: var(--terracotta);
+  color: var(--sand);
+}
+
+/* Logged-in profile sticker in hero */
+.user-sticker {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Kalam', cursive;
+  font-size: 1.2rem;
+  background: white;
+  border: 3px solid var(--dark-slate);
+  padding: 0.6rem 1.2rem;
+  box-shadow: 5px 5px 0 var(--dark-slate);
+  transform: rotate(-1deg);
+  z-index: 5;
+  user-select: none;
+  pointer-events: auto;
+  transition: transform 0.2s ease;
+  filter: url(#hand-drawn);
+}
+
+.user-sticker:hover {
+  transform: rotate(-1deg) scale(1.05);
+}
+
+.user-sticker strong {
+  margin-left: 0.3rem;
+  color: var(--terracotta);
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-underline-offset: 4px;
+}

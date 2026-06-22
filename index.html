@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>brush that cat | the cute-absurd grooming hazard</title>
+  <meta name="description"
+    content="A cute-absurd non-profit game about brushing a cat. Beware: it will get angry and catch you! Compete your score with others!">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+  <!-- Paper Texture Noise Overlay -->
+  <div class="noise-overlay"></div>
+
+  <!-- SVG DEFINITIONS FOR TEXTURES AND HAND-DRAWN BORDERS -->
+  <svg style="position: absolute; width: 0; height: 0; pointer-events: none;" aria-hidden="true">
+    <defs>
+      <!-- Paper grain texture -->
+      <filter id="noiseFilter">
+        <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" />
+      </filter>
+
+      <!-- Hand-drawn border warp filter -->
+      <filter id="hand-drawn">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+
+      <!-- Hand-drawn wiggling border warp filter -->
+      <filter id="hand-drawn-wiggle">
+        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G">
+          <animate attributeName="scale" values="3;5;3" dur="0.4s" repeatCount="indefinite" />
+        </feDisplacementMap>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Navigation & Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo-container">
+        <div class="logo-icon hand-drawn-border organic-shape-2">🐱</div>
+        <span class="logo-text">BRUSH CAT SIMULATOR</span>
+      </div>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li class="nav-item"><a href="./index.html" aria-current="page">how to play</a></li>
+          <li class="nav-item" id="nav-logout-item" style="display: none;">
+            <a href="#" id="navbar-logout-btn">logout</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+
+
+  <!-- Hero Section -->
+  <main class="container">
+    <section class="hero" aria-label="Introduction">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>★ Official Non-Profit Grooming Lab</span>
+        </div>
+        <h1>
+          Groom the Beast. <br>
+          <span class="highlight">Avoid the Claws.</span>
+        </h1>
+
+        <!-- Sticky Doodle Stickers -->
+        <div class="container" style="position: relative;">
+          <div class="sticker organic-shape-3" style="top: -35px; left: 20px; --sticker-rot: -8deg;" id="sticker-2">
+            <span>Do your own risk</span>
+          </div>
+        </div>
+
+        <!-- Auth Buttons Container -->
+        <div class="hero-buttons">
+          <a href="game.html" class="btn btn-primary">START BRUSHING NOW!</a>
+          <button id="login-btn" class="btn btn-sage">LOGIN</button>
+        </div>
+      </div>
+
+      <!-- image gift -->
+      <div
+        style="position: relative; justify-self: center; transform: rotate(2deg) translate(70px, -50px); width: 400px;">
+        <!-- <-- Ubah 200px ini (misal menjadi 350px atau lebih besar) -->
+        <!-- Pita tetap dipertahankan, posisinya akan mengikuti pojok kanan atas GIF -->
+        <div class="tape tape-top-right">#purrfect</div>
+
+        <!-- Gambar GIF langsung tanpa border/bingkai, melebar 100% mengikuti kontainer luar -->
+        <img src="https://media.tenor.com/FYsjyvi3C7kAAAAi/rupert-cat.gif" alt="Rupert Cat 3D Spin"
+          style="width: 100%; height: auto; display: block;">
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="footer-logo">Brush Cat Studios</span>
+      </div>
+      <p class="footer-text">
+        © 2024 Brush Cat Studios. No cats were harmed in the making of this simulator.
+      </p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cat Care Guide</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scrapbook Auth Modal Backdrop -->
+  <div id="auth-modal-backdrop" class="modal-backdrop">
+    <div class="scrapbook-modal" id="auth-modal">
+      <!-- Close Button -->
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">×</button>
+
+      <!-- Tape & Sticker Decorations -->
+      <div class="modal-tape-decor modal-tape-top-left">#brushcat</div>
+      <div class="modal-sticker-decor modal-sticker-paw">🐾</div>
+      <div class="modal-sticker-decor modal-sticker-cat">🐱</div>
+
+      <!-- Login View -->
+      <div class="modal-view active" id="login-view">
+        <h2 class="modal-title">Login</h2>
+        <form id="login-form" novalidate>
+          <div class="form-group">
+            <label for="login-username" class="handwritten-label">Username</label>
+            <input type="text" id="login-username" class="handbook-input" placeholder="e.g. catlover" required autocomplete="username">
+            <div class="field-error" id="login-username-error">Username is required!</div>
+          </div>
+          <div class="form-group">
+            <label for="login-password" class="handwritten-label">Password</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="login-password" class="handbook-input" placeholder="••••••••" required autocomplete="current-password">
+              <button type="button" class="password-toggle-btn" id="login-pass-toggle" aria-label="Show password">👁️</button>
+            </div>
+            <div class="field-error" id="login-password-error">Password is required!</div>
+          </div>
+          <button type="submit" class="btn btn-sage modal-submit-btn">Login</button>
+        </form>
+        <div class="hand-drawn-divider"></div>
+        <p class="modal-footer-text">
+          Don't have an account? <span class="highlight-link" id="switch-to-signup">Create account</span>
+        </p>
+      </div>
+
+      <!-- Sign Up View -->
+      <div class="modal-view" id="signup-view">
+        <h2 class="modal-title">Sign Up</h2>
+        <form id="signup-form" novalidate>
+          <div class="form-group">
+            <label for="signup-username" class="handwritten-label">Username</label>
+            <input type="text" id="signup-username" class="handbook-input" placeholder="e.g. catlover" required autocomplete="username">
+            <div class="field-error" id="signup-username-error">Username is required!</div>
+          </div>
+          <div class="form-group">
+            <label for="signup-password" class="handwritten-label">Password</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="signup-password" class="handbook-input" placeholder="••••••••" required autocomplete="new-password">
+              <button type="button" class="password-toggle-btn" id="signup-pass-toggle" aria-label="Show password">👁️</button>
+            </div>
+            <div class="field-error" id="signup-password-error">Password is required!</div>
+          </div>
+          <button type="submit" class="btn modal-submit-btn">Sign Up</button>
+        </form>
+        <div class="hand-drawn-divider"></div>
+        <p class="modal-footer-text">
+          Already have an account? <span class="highlight-link" id="switch-to-login">Log in</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Script for Landing Page Auth Logic -->
+  <script src="./script.js"></script>
+</body>

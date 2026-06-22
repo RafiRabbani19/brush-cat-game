@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gameplay - Brush That Cat</title>
+
+    <!-- Fonts used for game over screen, score, and leaderboard -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&family=Fredoka:wght@600&family=Kalam:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Main shared stylesheet -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="game-page">
+
+    <!-- Paper Texture Noise Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- SVG DEFINITIONS FOR TEXTURES AND HAND-DRAWN BORDERS -->
+    <svg style="position: absolute; width: 0; height: 0; pointer-events: none;" aria-hidden="true">
+        <defs>
+            <filter id="hand-drawn">
+                <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+        </defs>
+    </svg>
+
+    <main class="game-layout">
+
+        <!-- Sidebar Container for Leaderboard -->
+        <div class="sidebar-container">
+
+            <!-- Leaderboard Paper Scrap -->
+            <aside class="leaderboard-sidebar hand-drawn-border organic-shape-2">
+                <div class="tape tape-top-center"></div>
+                <h2 class="leaderboard-title">Top Sinko Groomers</h2>
+                <ul class="leaderboard-list">
+                    <li class="leaderboard-item" style="justify-content: center; font-style: italic;">
+                        Loading leaderboard...
+                    </li>
+                </ul>
+
+                <div class="leaderboard-divider"></div>
+
+                <div class="leaderboard-item my-best">
+                    <span class="rank">#86</span>
+                    <span class="username">You (My Best)</span>
+                    <span class="high-score">0</span>
+                </div>
+            </aside>
+
+        </div>
+
+        <!-- Active area: the entire game zone where the custom comb cursor is shown -->
+        <div id="game-area">
+
+            <!-- Score text, positioned at the top-left of the cat image -->
+            <div id="score">Score: 0</div>
+
+            <!-- Cat image -->
+            <img id="cat" src="assets/orange-relax.png" alt="Cat" draggable="false">
+
+            <!-- Custom comb cursor (follows mouse inside game-area) -->
+            <img id="comb" src="assets/comb.png" alt="Comb" draggable="false">
+
+            <!-- Game Over overlay — appears on top of the cat -->
+            <div id="game-over">
+                <p>Game Over</p>
+                <span>Click to restart</span>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
