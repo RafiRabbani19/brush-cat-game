@@ -1,6 +1,6 @@
 # Brushcat Game (Grooming Simulator)
 
-Sebuah game non-profit bertema *cute-absurd* tentang merawat seekor kucing. Sisirlah kucingnya dan raih skor tertinggi! Namun hati-hati, jangan membuat kucing tersebut marah dan mencakar Anda. Kumpulkan skor terbaik Anda dan bersainglah dengan pemain lain di Papan Peringkat (Leaderboard).
+Sebuah game berbasis website tentang menyisir seekor kucing. Objektif utamanya adalah meraih skor setinggi mungkin dengan menyisir kucing tanpa membuatnya marah dan game over.
 
 Proyek ini terdiri dari dua bagian utama:
 1. **Frontend:** Aplikasi web berbasis HTML, CSS (Vanilla), dan JavaScript yang dijalankan di sisi client (browser).
