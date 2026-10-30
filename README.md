@@ -1,4 +1,4 @@
-# Brushcat Game (Grooming Simulator)
+# Brushcat Game
 
 Sebuah game berbasis website tentang menyisir seekor kucing. Objektif utamanya adalah meraih skor setinggi mungkin dengan menyisir kucing tanpa membuatnya marah dan game over.
 
